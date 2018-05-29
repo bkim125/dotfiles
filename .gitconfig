@@ -1,0 +1,10 @@
+[user]
+	email = bkim213@gmail.com
+	name  = Benjamin Kim
+
+[alias]
+    h  = log --pretty=format:\"%h %s\" --graph
+    st = status --short
+    br = branch
+    co = checkout
+    ci = commit
