@@ -77,25 +77,24 @@ fi
 # Prompt Customization
 # =============================================================================
 # git-branch information
+local TURQUOISE=30
 setopt prompt_subst
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' actionformats \
     '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f'
-#zstyle ':vcs_info:*' formats       \
-    #'%F{15}:(%f%F{30}%s%F{15})%F{30}-%F{15}[%F{30}%b%F{15}]%f'
 zstyle ':vcs_info:*' formats       \
-    '%F{15}:[%f%F{30}%s%F{15}:%F{30}%b%F{15}]%f'
+    '%F{15}:<%f%F{30}%s%F{15}:%F{30}%b%F{15}>%f'
 zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
 zstyle ':vcs_info:*' enable git cvs svn
 vcs_info_wrapper() {
-  vcs_info
-  if [ -n "$vcs_info_msg_0_" ]; then
-    echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
-  fi
+    vcs_info
+    if [ -n "$vcs_info_msg_0_" ]; then
+        echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
+    fi
 }
 
-local git_info=$'$(vcs_info_wrapper)'
 local turquoise="030"
+local git_info=$'$(vcs_info_wrapper)'
 local name="%{$FG[${turquoise}]%}%n%{$reset_color%}"
 local directory="%{$FG[${turquoise}]%}%~%{$reset_color%}"
 
@@ -126,3 +125,11 @@ smartextract () {
 sendkey() {
     cat ~/.ssh/id_rsa.pub | ssh "$1" "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
 }
+
+# Setup OpenGrok
+# =============================================================================
+if [ $(uname -s) = "Linux" ]; then
+    export OPENGROK_TOMCAT_BASE=/usr/share/tomcat8
+elif [ $(uname -s) = "Darwin" ]; then
+    export OPENGROK_TOMCAT_BASE=/usr/local/Cellar/tomcat/9.0.8/libexec
+fi

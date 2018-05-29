@@ -7,7 +7,7 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
-let idnt = 3
+let idnt = 4
 
 " General Config
 " =============================================================================
@@ -82,16 +82,27 @@ function! FoldText()
     return l:snippet . ' ...'
 endfunction
 
-au BufNewFile,BufRead *.cpp set syntax=cpp11
+function! ReopenOnLastPosition()
+    if has("autocmd")
+      au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+        \| exe "normal! g'\"" | endif
+    endif
+endfunction
 
-" Helper Functions
+function! Split(name_index)
+python << endPython
+import subprocess, vim
+filename = subprocess.check_output("sr -ef %s" % name_index, shell=True)
+filename = filename.decode('UTF-8').rstrip()
+vim.command("vsplit %s" % filename)
+endPython
+endfunction
+
+au BufNewFile,BufRead *.cpp set syntax=cpp11
+execute ReopenOnLastPosition()
+
+" Clang Format
 " =============================================================================
 map <C-K> :pyf ~/clang-format.py<cr>
 imap <C-K><c-o> :pyf ~/clang-format.py<cr>
 
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal! g'\"" | endif
-endif
