@@ -16,6 +16,7 @@ for i in $LIBS; do [[ -f $i ]] && source $i; done
 
 # Color Setup
 # =============================================================================
+alias ls='ls --color'
 autoload -U colors && colors
 
 # Keybindings
@@ -96,9 +97,10 @@ vcs_info_wrapper() {
 local turquoise="030"
 local git_info=$'$(vcs_info_wrapper)'
 local name="%{$FG[${turquoise}]%}%n%{$reset_color%}"
+local hostname="%{$FG[${turquoise}]%}%m%{$reset_color%}"
 local directory="%{$FG[${turquoise}]%}%~%{$reset_color%}"
 
-PROMPT="[${name}${git_info}:${directory}] "
+PROMPT="[${name}@${hostname}:${git_info}:${directory}] "
 
 # Useful Functions
 # =============================================================================
@@ -131,5 +133,8 @@ sendkey() {
 if [ $(uname -s) = "Linux" ]; then
     export OPENGROK_TOMCAT_BASE=/usr/share/tomcat8
 elif [ $(uname -s) = "Darwin" ]; then
-    export OPENGROK_TOMCAT_BASE=/usr/local/Cellar/tomcat/9.0.8/libexec
+    export OPENGROK_TOMCAT_BASE=/usr/local/Cellar/tomcat/12.0.8/libexec
+    export OPENGROK_INSTANCE_BASE=/home/novumind/local_src
 fi
+
+export EDITOR='vim'

@@ -65,6 +65,7 @@ nnoremap <s-u> <c-u>
 nnoremap <s-d> <c-d>
 nnoremap <s-f> <c-f>
 nnoremap <s-b> <c-b>
+cnoremap <c-a> <c-b>
 
 " Helper Functions
 " =============================================================================
@@ -91,10 +92,13 @@ endfunction
 
 function! Split(name_index)
 python << endPython
-import subprocess, vim
+import os, subprocess, vim
 filename = subprocess.check_output("sr -ef %s" % name_index, shell=True)
 filename = filename.decode('UTF-8').rstrip()
-vim.command("vsplit %s" % filename)
+if os.path.isfile(filename):
+    vim.command("split %s" % filename)
+else:
+    print("file not found")
 endPython
 endfunction
 
@@ -103,6 +107,6 @@ execute ReopenOnLastPosition()
 
 " Clang Format
 " =============================================================================
-map <C-K> :pyf ~/clang-format.py<cr>
-imap <C-K><c-o> :pyf ~/clang-format.py<cr>
+"autocmd Filetype c, cpp ClangFormatAutoEnable
+"autocmd FileType c,cpp nnoreamp <buffer><Leader>cf :<C-u>ClangFormat<CR>
 
