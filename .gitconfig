@@ -3,8 +3,11 @@
 	name  = Benjamin Kim
 
 [alias]
-    h  = log --pretty=format:\"%h %s\" --graph
+    h  = log --pretty=format:\"%h %ad | %s%Cgreen%d%Creset [%an]\" --graph --date=relative
+    hn = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=relative -n
+    d  = diff --stat
     st = status --short
     br = branch
     co = checkout
     ci = commit
+    sync = pull --rebase origin
