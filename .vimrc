@@ -91,9 +91,9 @@ function! ReopenOnLastPosition()
 endfunction
 
 function! Split(name_index)
-python << endPython
+python3 << endPython
 import os, subprocess, vim
-filename = subprocess.check_output("sr -ef %s" % name_index, shell=True)
+filename = subprocess.check_output("sr -ef %s" % vim.eval("a:name_index"), shell=True)
 filename = filename.decode('UTF-8').rstrip()
 if os.path.isfile(filename):
     vim.command("split %s" % filename)
@@ -109,4 +109,5 @@ execute ReopenOnLastPosition()
 " =============================================================================
 "autocmd Filetype c, cpp ClangFormatAutoEnable
 "autocmd FileType c,cpp nnoreamp <buffer><Leader>cf :<C-u>ClangFormat<CR>
-
+let g:clang_format#style_options = {
+    \ "AccessModifierOffset" : -2 }
