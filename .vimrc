@@ -102,7 +102,19 @@ else:
 endPython
 endfunction
 
-au BufNewFile,BufRead *.cpp set syntax=cpp11
+function! Vsplit(name_index)
+python3 << endPython
+import os, subprocess, vim
+filename = subprocess.check_output("sr -ef %s" % vim.eval("a:name_index"), shell=True)
+filename = filename.decode('UTF-8').rstrip()
+if os.path.isfile(filename):
+    vim.command("vsplit %s" % filename)
+else:
+    print("file not found")
+endPython
+endfunction
+
+au BufNewFile,BufRead *.cpp set syntax=cpp
 execute ReopenOnLastPosition()
 
 " Clang Format
