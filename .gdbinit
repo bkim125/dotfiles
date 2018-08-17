@@ -7,9 +7,10 @@ set history filename ~/.gdb_history
 # remove duplicate commands
 python
 import os
-file_name = "~/.gdb_history"
-with open() as f:
+import getpass
+file_name = "/home/{}/.gdb_history".format(getpass.getuser())
+with open(file_name) as f:
     contents = set([line.rstrip() for line in f.readlines()])
-with open() as f:
+with open(file_name, 'w') as f:
     f.write('\n'.join(contents) + '\n')
 end
