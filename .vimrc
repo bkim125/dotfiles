@@ -115,6 +115,15 @@ endPython
 endfunction
 
 au BufNewFile,BufRead *.cpp set syntax=cpp
+let g:cpp_class_scope_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_member_variable_highlight = 1
+"let g:cpp_no_function_highlight = 1
+"let g:cpp_simple_highlight = 1
+
+"Removing all trailing whitespace by pressing F5
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
 execute ReopenOnLastPosition()
 
 " Clang Format
