@@ -11,3 +11,6 @@
     co = checkout
     ci = commit
     sync = pull --rebase origin
+    addu = add -u
+    ra = reset HEAD -- .
+    clean = clean -fd
