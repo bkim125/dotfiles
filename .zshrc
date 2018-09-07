@@ -100,7 +100,7 @@ local name="%{$FG[${turquoise}]%}%n%{$reset_color%}"
 local hostname="%{$FG[${turquoise}]%}%m%{$reset_color%}"
 local directory="%{$FG[${turquoise}]%}%~%{$reset_color%}"
 
-PROMPT="[${name}@${hostname}:${git_info}:${directory}] "
+PROMPT="[${name}@${hostname}${git_info}:${directory}] "
 
 # Useful Functions
 # =============================================================================
