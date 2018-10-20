@@ -33,6 +33,7 @@ autocmd Filetype python set foldmethod=indent " required for .py to fold properl
 autocmd Filetype perl   set foldmethod=indent " required for .pl to fold properly
 autocmd Filetype zsh    set foldmethod=indent
 autocmd Filetype make   set noexpandtab
+autocmd Filetype c,cpp  set comments^=:///
 
 " Color Configurations
 " =============================================================================
