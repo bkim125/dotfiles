@@ -7,6 +7,8 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
+set shortmess+=A
+
 let idnt = 4
 
 " General Config

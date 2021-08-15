@@ -8,9 +8,9 @@ SAVEHIST=1000
 # Libaries
 # =============================================================================
 LIBS=(
-'/Users/bkim/oh-my-zsh/lib/spectrum.zsh'
-'/Users/bkim/oh-my-zsh/lib/directories.zsh'
-'/Users/bkim/oh-my-zsh/lib/history.zsh'
+'/Users/bkim/ohmyzsh/lib/spectrum.zsh'
+'/Users/bkim/ohmyzsh/lib/directories.zsh'
+'/Users/bkim/ohmyzsh/lib/history.zsh'
 )
 for i in $LIBS; do [[ -f $i ]] && source $i; done
 
@@ -126,6 +126,10 @@ smartextract () {
 
 sendkey() {
     cat ~/.ssh/id_rsa.pub | ssh "$1" "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+}
+
+chr() {
+    cd ${SEARCH_ROOT}
 }
 
 # Setup OpenGrok
